@@ -1,0 +1,46 @@
+#include "Gragh/Gragh.h"
+#include "Gragh/DepthFirstPaths.h"
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+
+using std::string;
+using  std::ofstream;
+using  std::ifstream;
+using std::vector;
+ifstream in("tinyG.txt");
+ofstream out("2.txt");
+
+
+int main()
+{
+  
+	Gragh G (in);
+	int s = 0;
+	DepthFirstPaths search(G,s);
+	int vTemp = G.getV();
+	for (int v = 0;v<vTemp;v++)
+	{
+		out<< s <<" to "<< v << ":";
+		if (search.hasPathTo(v))
+		{
+			vector<int> paths = search.pathTo(v);
+			for (size_t i = 0;i<paths.size();i++)
+			{
+				int temp = paths[i];
+				if (temp == s)
+				{
+					out<<temp;
+
+				}
+				else
+				{
+					out<<temp<<"-";
+				}
+			}
+		}
+		out<< std::endl;
+
+	}
+}
